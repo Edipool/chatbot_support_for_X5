@@ -14,5 +14,3 @@ RUN pip install --no-cache-dir -r requirements.txt
 WORKDIR /chatbot_support_for_X5/qa/src/baseline
 
 EXPOSE 8081
-
-CMD ["uvicorn", "baseline:app", "--host", "0.0.0.0", "--port", "8081"]

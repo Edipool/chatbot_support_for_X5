@@ -22,5 +22,4 @@ WORKDIR /chatbot_support_for_X5/qa/src/baseline
 # Expose port 8080 to the outside world
 EXPOSE 8080
 
-# Указываем команду для запуска скрипта
-CMD ["python3", "proxy.py"]
+CMD ["uvicorn", "baseline:app", "--host", "0.0.0.0", "--port", "8080"]

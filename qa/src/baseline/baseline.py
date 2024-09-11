@@ -11,7 +11,9 @@ app = FastAPI()
 @app.get("/query")
 async def handle_query(query: str):
     global chatbot
-    return chatbot.predict(query)[0]
+    answer = chatbot.predict(query)[0]
+    print(f'query: {query}, answer: {answer}')
+    return answer
 
 if __name__ == "__main__":
     df = pd.read_excel('../../data/LK_modified.xlsx', sheet_name=1)

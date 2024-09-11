@@ -6,7 +6,7 @@ services:
       - "8081:8081"
     secrets:
       - git_token
-    command: uvicorn baseline:app --host 0.0.0.0 --port 8081
+    command: python3 baseline.py
 
   proxy-app:
     build: qa/src/proxy
@@ -14,7 +14,7 @@ services:
       - "8080:8080"
     secrets:
       - git_token
-    command: uvicorn proxy:app --host 0.0.0.0 --port 8080
+    command: python3 proxy.py
 
 secrets:
   git_token:

@@ -13,6 +13,8 @@ RUN git checkout qa_baseline
 
 RUN pip install --no-cache-dir -r requirements.txt
 
+ENV PYTHONPATH=/chatbot_support_for_X5/qa
+
 WORKDIR /chatbot_support_for_X5/qa/src/baseline
 
 EXPOSE 8081

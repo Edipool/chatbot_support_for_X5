@@ -11,6 +11,6 @@ RUN git checkout qa_baseline
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-WORKDIR /chatbot_support_for_X5/qa/src/baseline
+WORKDIR /chatbot_support_for_X5/qa/src/proxy
 
 EXPOSE 8080

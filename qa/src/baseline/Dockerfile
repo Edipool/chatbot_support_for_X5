@@ -7,6 +7,8 @@ RUN --mount=type=secret,id=git_token \
 
 WORKDIR /chatbot_support_for_X5/qa
 
+RUN export PYTHONPATH=`pwd`
+
 RUN git checkout qa_baseline
 
 RUN pip install --no-cache-dir -r requirements.txt

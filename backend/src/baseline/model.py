@@ -6,6 +6,9 @@ from deeppavlov.models.tokenizers.nltk_moses_tokenizer import (
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
+from deeppavlov.models.tokenizers.nltk_moses_tokenizer import NLTKMosesTokenizer as Tokenizer
+import nltk
+from nltk.corpus import stopwords
 
 nltk.download("punkt")
 nltk.download("stopwords")
@@ -175,7 +178,7 @@ class ChatbotModel:
         question_tfidf = self.tfidf_vectorizer.transform([question])
         similarities = cosine_similarity(question_tfidf, self.tfidf_matrix)
         most_similar_answer_index = similarities.argmax()
-        predicted_answer = self.data["content"].iloc[most_similar_answer_index]
+        predicted_answer = self.data['content'].iloc[most_similar_answer_index]
         score = similarities[0][most_similar_answer_index]
 
         return predicted_answer, score
@@ -295,4 +298,4 @@ if __name__ == "__main__":
     )
     label_encoder = LabelEncoder().fit(df["content"])
     chatbot = ChatbotModel(train_df, label_encoder)
-    print("macro-precision ", chatbot.evaluate(test_df["question"], test_df["content"]))
+    print('macro-precision ', chatbot.evaluate(test_df['question'], test_df['content']))

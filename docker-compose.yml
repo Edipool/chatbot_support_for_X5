@@ -1,7 +1,7 @@
 version: '3'
 services:
   baseline-app:
-    build: qa/src/baseline
+    build: backend/src/baseline
     ports:
       - "8081:8081"
     secrets:
@@ -9,7 +9,7 @@ services:
     command: python3 baseline.py
 
   proxy-app:
-    build: qa/src/proxy
+    build: backend/src/proxy
     ports:
       - "8080:8080"
     secrets:

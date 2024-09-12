@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from deeppavlov.models.tokenizers.nltk_moses_tokenizer import NLTKMosesTokenizer as Tokenizer
 import nltk
 from nltk.corpus import stopwords
+from collections import Counter
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -169,11 +170,17 @@ class ChatbotModel:
         question = ' '.join(question_tokens)
         question_tfidf = self.tfidf_vectorizer.transform([question])
         similarities = cosine_similarity(question_tfidf, self.tfidf_matrix)
-        most_similar_answer_index = similarities.argmax()
-        predicted_answer = self.data['content'].iloc[most_similar_answer_index]
-        score = similarities[0][most_similar_answer_index]
+        
+        # 3 voters
+        most_similar_answer_idxs = (-similarities[0]).argpartition(3)[:3]
+        #print(f'{most_similar_answer_idxs=}')
+        #print(f'{similarities=}')
+        #print(similarities[0][most_similar_answer_idxs[0]])
+        if similarities[0][most_similar_answer_idxs[0]] < 0.2:
+            return 'поддержка', similarities[0][most_similar_answer_idxs[0]]
+        predicted_answer = Counter(self.data['content'].iloc[most_similar_answer_idxs]).most_common(1)[0][0]
+        return predicted_answer, similarities[0][most_similar_answer_idxs]     
 
-        return predicted_answer, score
 
     def _predict_with_w2v(self, question):
         """

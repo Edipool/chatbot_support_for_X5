@@ -16,6 +16,14 @@ services:
       - git_token
     command: python3 proxy.py
 
+  advanced-app:
+    build: backend/src/advanced
+    ports:
+      - "8082:8082"
+    secrets:
+      - git_token
+    command: python3 advanced.py
+
 secrets:
   git_token:
     file: /home/artem/git_token.txt

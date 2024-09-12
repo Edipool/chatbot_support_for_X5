@@ -1,0 +1,21 @@
+version: '3'
+services:
+  baseline-app:
+    build: qa/src/baseline
+    ports:
+      - "8081:8081"
+    secrets:
+      - git_token
+    command: python3 baseline.py
+
+  proxy-app:
+    build: qa/src/proxy
+    ports:
+      - "8080:8080"
+    secrets:
+      - git_token
+    command: python3 proxy.py
+
+secrets:
+  git_token:
+    file: /home/artem/git_token.txt
